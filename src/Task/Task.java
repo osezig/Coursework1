@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task implements Comparable<Task> {
-    private final int ID;
+    private final int iD;
     private boolean isWorkTask;
     private String title;
     private String description;
@@ -21,22 +21,12 @@ public class Task implements Comparable<Task> {
         this.createdTime = LocalDateTime.now();
         this.isWorkTask = isWorkTask;
         Task.counter++;
-        this.ID = counter;
+        this.iD = counter;
         this.periodicity = periodicity;
-    }
-
-    //Getters & Setters:
-
-    public String getTitle() {
-        return title;
     }
 
     public void setTitle(String title) {
         this.title = ValidateUtil.validateString(title);
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void setDescription(String description) {
@@ -51,8 +41,8 @@ public class Task implements Comparable<Task> {
         this.createdTime = createdTime;
     }
 
-    public int getID() {
-        return ID;
+    public int getiD() {
+        return iD;
     }
 
     public Periodicity getPeriodicity() {
@@ -67,10 +57,6 @@ public class Task implements Comparable<Task> {
         this.deleted = deleted;
     }
 
-    public boolean isDeleted() {
-        return deleted;
-    }
-
     public LocalDateTime getNextDateTask() {
         return nextDateTask;
     }
@@ -83,10 +69,6 @@ public class Task implements Comparable<Task> {
         this.isWorkTask = workTask;
     }
 
-    public boolean isWorkTask() {
-        return isWorkTask;
-    }
-
     @Override
     public String toString() {
         String isWork = isWorkTask ? "Рабочая задача" : "Личная задача";
@@ -95,7 +77,7 @@ public class Task implements Comparable<Task> {
                 ", description='" + description + '\'' +
                 ", Type=" + isWork + '\'' +
                 ", Created Date=" + createdTime.format(TaskUtil.FORMAT_DATE) +
-                ", id=" + ID +
+                ", id=" + iD +
                 '}' + "\n";
     }
 
@@ -104,12 +86,12 @@ public class Task implements Comparable<Task> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return ID == task.ID && isWorkTask == task.isWorkTask && deleted == task.deleted && Objects.equals(title, task.title) && Objects.equals(description, task.description) && Objects.equals(createdTime, task.createdTime) && Objects.equals(nextDateTask, task.nextDateTask) && periodicity == task.periodicity;
+        return iD == task.iD && isWorkTask == task.isWorkTask && deleted == task.deleted && Objects.equals(title, task.title) && Objects.equals(description, task.description) && Objects.equals(createdTime, task.createdTime) && Objects.equals(nextDateTask, task.nextDateTask) && periodicity == task.periodicity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, isWorkTask, title, description, createdTime, nextDateTask, periodicity, deleted);
+        return Objects.hash(iD, isWorkTask, title, description, createdTime, nextDateTask, periodicity, deleted);
     }
 
     @Override

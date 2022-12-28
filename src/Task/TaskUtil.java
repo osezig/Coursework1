@@ -28,7 +28,7 @@ public class TaskUtil {
                 inputDescription(scanner),
                 inputPeriodicity(scanner),
                 inputTypeTask(scanner));
-        taskCollection.put(task.getID(), task);
+        taskCollection.put(task.getiD(), task);
     }
 
     public static void deleteTask(Scanner scanner) {
@@ -37,28 +37,19 @@ public class TaskUtil {
         System.out.println("Введите ID задачи: ");
         int idForDelete = scanner.nextInt();
 
-        archive.put(taskCollection.get(idForDelete).getID(), taskCollection.get(idForDelete));
+        archive.put(taskCollection.get(idForDelete).getiD(), taskCollection.get(idForDelete));
 
         archive.get(idForDelete).setDeleted(true);
         taskCollection.remove(idForDelete);
     }
 
     public static void printTaskForSpecifyDay(Scanner scanner) {
-        /*
-         *   Получаем со сканера дату и записываем как объект LocalDateTime
-         */
+
         String date = inputDate(scanner);
         LocalDateTime localDateTime = LocalDate.parse(date, TaskUtil.FORMAT_DATE_TWO).atStartOfDay();
 
-        /*
-         *   Приводим переменную NextDateTask всех задач в исходное положение,
-         *   на случай если это не первый запуск метода printTaskForSpecifyDay
-         */
-        returnNextDate();  //
+        returnNextDate();
 
-        /*
-         *   Проходим по коллекции для записи в переменную NextDateTask ближайшую дату к полученной от сканера
-         */
         for (Task task : TaskUtil.taskCollection.values()) {
             switch (task.getPeriodicity()) {
                 case WEEKLY:
@@ -87,10 +78,6 @@ public class TaskUtil {
             }
         }
 
-        /*
-         *   Создаем динамический массив и ложим в него задачи
-         *   у которых значение переменной NextDateTask совпадает с полученой от сканера
-         */
         ArrayList<Task> taskArrayList = new ArrayList<>();
         for (Task task : taskCollection.values()) {
             if (task.getNextDateTask()
